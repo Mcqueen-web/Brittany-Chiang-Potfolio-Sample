@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brittany Chiang Style Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            navy: '#0a192f',
+            lightNavy: '#112240',
+            lightestNavy: '#233554',
+            slate: '#8892b0',
+            lightSlate: '#a8b2d1',
+            lightestSlate: '#ccd6f6',
+            green: '#64ffda',
+          },
+          boxShadow: {
+            navy: '0 10px 30px -15px rgba(2,12,27,0.7)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      background: #0a192f;
+      color: #8892b0;
+    }
+
+    ::selection {
+      background: #233554;
+      color: #ccd6f6;
+    }
+
+    /* This makes the fixed header smoothly disappear and appear while scrolling */
+    #siteHeader {
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    #siteHeader.hide-header {
+      transform: translateY(-100%);
+    }
+
+    .section-heading::after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 300px;
+      background: #233554;
+      margin-left: 22px;
+    }
+
+    .tab-btn.active {
+      color: #64ffda;
+      background: rgba(100, 255, 218, 0.08);
+      border-left-color: #64ffda;
+    }
+
+    .project-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(100, 255, 218, 0.25);
+      mix-blend-mode: screen;
+      transition: 0.25s ease;
+      z-index: 1;
+    }
+
+    .project-image:hover::before { background: transparent; }
+
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: 0.25s ease;
+    }
+
+    .mobile-menu.open { transform: translateX(0); }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+  </style>
+</head>
+
+<body class="font-sans leading-relaxed overflow-x-hidden">
+  <!-- Header -->
+  <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-navy/90 backdrop-blur-md">
+    <nav class="h-24 px-6 md:px-10 lg:px-12 flex items-center justify-between">
+      <a href="#home" class="group relative w-12 h-12 flex items-center justify-center">
+        <svg viewBox="0 0 100 100" class="w-12 h-12 fill-none stroke-green stroke-[5]">
+          <polygon points="50 5 88 27 88 73 50 95 12 73 12 27"></polygon>
+        </svg>
+        <span class="absolute font-mono text-green font-bold text-xl">B</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8 font-mono text-sm text-lightestSlate">
+        <a href="#about" class="hover:text-green transition"><span class="text-green">01.</span> About</a>
+        <a href="#experience" class="hover:text-green transition"><span class="text-green">02.</span> Experience</a>
+        <a href="#work" class="hover:text-green transition"><span class="text-green">03.</span> Work</a>
+        <a href="#contact" class="hover:text-green transition"><span class="text-green">04.</span> Contact</a>
+        <a href="#" class="border border-green text-green rounded px-5 py-3 hover:shadow-[4px_4px_0_0_#64ffda] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:bg-green/10 transition duration-200">Resume</a>
+      </div>
+
+      <!-- Mobile button only -->
+      <button id="menuBtn" class="hamburger md:hidden relative z-[70] w-10 h-10 flex flex-col justify-center gap-1.5" aria-label="Open menu">
+        <span class="block h-0.5 w-8 bg-green transition"></span>
+        <span class="block h-0.5 w-6 bg-green transition ml-auto"></span>
+        <span class="block h-0.5 w-8 bg-green transition"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile menu -->
+  <aside id="mobileMenu" class="mobile-menu fixed top-0 right-0 bottom-0 z-[60] w-[75%] max-w-xs bg-lightNavy shadow-navy md:hidden flex flex-col items-center justify-center gap-8 font-mono text-lightestSlate">
+    <a href="#about" class="mobile-link flex flex-col items-center gap-2 hover:text-green"><span class="text-green">01.</span> About</a>
+    <a href="#experience" class="mobile-link flex flex-col items-center gap-2 hover:text-green"><span class="text-green">02.</span> Experience</a>
+    <a href="#work" class="mobile-link flex flex-col items-center gap-2 hover:text-green"><span class="text-green">03.</span> Work</a>
+    <a href="#contact" class="mobile-link flex flex-col items-center gap-2 hover:text-green"><span class="text-green">04.</span> Contact</a>
+    <a href="#" class="border border-green text-green rounded px-12 py-4 hover:shadow-[4px_4px_0_0_#64ffda] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:bg-green/10 transition duration-200">Resume</a>
+  </aside>
+
+  <!-- Left social links -->
+  <div class="hidden lg:flex fixed bottom-0 left-10 z-40 flex-col items-center gap-6 text-lightSlate after:content-[''] after:block after:w-px after:h-24 after:bg-lightSlate">
+    <a href="#" aria-label="GitHub" class="hover:text-green hover:-translate-y-1 transition">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+    </a>
+    <a href="#" aria-label="Instagram" class="hover:text-green hover:-translate-y-1 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    <a href="#" aria-label="Twitter" class="hover:text-green hover:-translate-y-1 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.4.7a4.1 4.1 0 0 0 1.8-2.3 8.3 8.3 0 0 1-2.6 1 4.1 4.1 0 0 0-7 3.7A11.7 11.7 0 0 1 3.4 4.7a4.1 4.1 0 0 0 1.3 5.5c-.6 0-1.3-.2-1.8-.5v.1a4.1 4.1 0 0 0 3.3 4 4.4 4.4 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.8A8.3 8.3 0 0 1 2 18.4a11.7 11.7 0 0 0 6.3 1.8c7.5 0 11.7-6.2 11.7-11.7v-.5c.8-.5 1.5-1.2 2-2.1Z"/></svg></a>
+    <a href="#" aria-label="LinkedIn" class="hover:text-green hover:-translate-y-1 transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9Z"/></svg></a>
+    <a href="#" aria-label="CodePen" class="hover:text-green hover:-translate-y-1 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 2 9 5.5v9L12 22l-9-5.5v-9L12 2Z"/><path d="m3 7.5 9 5.5 9-5.5M3 16.5l9-5.5 9 5.5M12 2v9m0 2v9"/></svg></a>
+  </div>
+
+  <!-- Right email -->
+  <div class="hidden lg:flex fixed bottom-0 right-10 z-40 flex-col items-center gap-6 text-lightSlate after:content-[''] after:block after:w-px after:h-24 after:bg-lightSlate">
+    <a href="mailto:brittany.chiang@gmail.com" class="font-mono text-xs tracking-[0.18em] hover:text-green hover:-translate-y-1 transition [writing-mode:vertical-rl]">brittany.chiang@gmail.com</a>
+  </div>
+
+  <main class="px-6 sm:px-12 md:px-20 lg:px-36 xl:px-40">
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex flex-col justify-center max-w-5xl mx-auto pt-24">
+      <p class="font-mono text-green mb-6">Hi, my name is</p>
+      <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-extrabold text-lightestSlate leading-tight">Brittany Chiang.</h1>
+      <h2 class="text-[clamp(2.4rem,7vw,4.6rem)] font-extrabold text-slate leading-tight mt-1">I build things for the web.</h2>
+      <p class="max-w-xl mt-7 text-lg text-lightSlate">
+        I’m a software engineer specializing in building and occasionally designing exceptional digital experiences.
+        Currently, I’m focused on building accessible, human-centered products at
+        <a href="#" class="text-green hover:underline">Upstatement</a>.
+      </p>
+      <a href="#" class="font-mono text-green border border-green rounded px-7 py-4 w-fit mt-12 hover:bg-green/10 transition">Check out my course!</a>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="max-w-4xl mx-auto py-24">
+      <h2 class="section-heading flex items-center text-2xl md:text-3xl font-bold text-lightestSlate mb-10">
+        <span class="font-mono text-green text-xl mr-3">01.</span> About Me
+      </h2>
+
+      <div class="grid md:grid-cols-[3fr_2fr] gap-12 items-start">
+        <div class="space-y-4 text-lg text-lightSlate">
+          <p>Hello! My name is Brittany and I enjoy creating things that live on the internet. My interest in web development started back in 2012 when I decided to try editing custom Tumblr themes — turns out hacking together a custom reblog button taught me a lot about HTML & CSS!</p>
+          <p>Fast-forward to today, and I’ve had the privilege of working at <span class="text-green">an advertising agency</span>, <span class="text-green">a start-up</span>, <span class="text-green">a huge corporation</span>, and <span class="text-green">a student-led design studio</span>. My main focus these days is building accessible, inclusive products and digital experiences at <span class="text-green">Upstatement</span> for a variety of clients.</p>
+          <p>I also recently <span class="text-green">launched a course</span> that covers everything you need to build a web app with the Spotify API using Node & React.</p>
+          <p>Here are a few technologies I’ve been working with recently:</p>
+
+          <ul class="grid grid-cols-2 gap-2 font-mono text-sm text-slate">
+            <li class="before:content-['▹'] before:text-green before:mr-3">JavaScript (ES6+)</li>
+            <li class="before:content-['▹'] before:text-green before:mr-3">TypeScript</li>
+            <li class="before:content-['▹'] before:text-green before:mr-3">React</li>
+            <li class="before:content-['▹'] before:text-green before:mr-3">Eleventy</li>
+            <li class="before:content-['▹'] before:text-green before:mr-3">Node.js</li>
+            <li class="before:content-['▹'] before:text-green before:mr-3">WordPress</li>
+          </ul>
+        </div>
+
+        <div class="relative group max-w-xs mx-auto md:mx-0">
+          <div class="relative rounded bg-green overflow-hidden z-10">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt="Profile portrait" class="grayscale mix-blend-multiply contrast-125 group-hover:filter-none group-hover:mix-blend-normal transition duration-300 w-full h-full object-cover">
+          </div>
+          <div class="absolute top-4 left-4 w-full h-full rounded border-2 border-green group-hover:top-3 group-hover:left-3 transition"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="max-w-3xl mx-auto py-24">
+      <h2 class="section-heading flex items-center text-2xl md:text-3xl font-bold text-lightestSlate mb-12">
+        <span class="font-mono text-green text-xl mr-3">02.</span> Where I’ve Worked
+      </h2>
+
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="flex md:flex-col overflow-x-auto md:overflow-visible font-mono text-sm min-w-max md:min-w-[160px]">
+          <button class="tab-btn active text-left border-b-2 md:border-b-0 md:border-l-2 border-lightestNavy px-5 py-3 hover:text-green hover:bg-green/5 transition" data-tab="tab1">Upstatement</button>
+          <button class="tab-btn text-left border-b-2 md:border-b-0 md:border-l-2 border-lightestNavy px-5 py-3 hover:text-green hover:bg-green/5 transition" data-tab="tab2">Apple</button>
+          <button class="tab-btn text-left border-b-2 md:border-b-0 md:border-l-2 border-lightestNavy px-5 py-3 hover:text-green hover:bg-green/5 transition" data-tab="tab3">Scout Studio</button>
+          <button class="tab-btn text-left border-b-2 md:border-b-0 md:border-l-2 border-lightestNavy px-5 py-3 hover:text-green hover:bg-green/5 transition" data-tab="tab4">Starry</button>
+          <button class="tab-btn text-left border-b-2 md:border-b-0 md:border-l-2 border-lightestNavy px-5 py-3 hover:text-green hover:bg-green/5 transition" data-tab="tab5">MullenLowe</button>
+        </div>
+
+        <div class="text-lightSlate">
+          <article id="tab1" class="tab-panel space-y-5">
+            <h3 class="text-xl font-semibold text-lightestSlate">Lead Engineer <span class="text-green">@ Upstatement</span></h3>
+            <p class="font-mono text-sm text-slate">May 2018 — Present</p>
+            <ul class="space-y-4">
+              <li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Deliver high-quality, robust production code for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more</li>
+              <li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Work alongside creative directors to lead the research, development, and architecture of technical solutions to fulfill business requirements</li>
+              <li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Collaborate with designers, project managers, and other engineers to transform creative concepts into production realities for clients and stakeholders</li>
+              <li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Provide leadership within engineering department through close collaboration, knowledge shares, and mentorship</li>
+            </ul>
+          </article>
+
+          <article id="tab2" class="tab-panel hidden space-y-5"><h3 class="text-xl font-semibold text-lightestSlate">UI Engineer <span class="text-green">@ Apple</span></h3><p class="font-mono text-sm text-slate">July 2017 — May 2018</p><ul class="space-y-4"><li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Built interfaces and internal tools with a focus on performance, accessibility, and clean user experience.</li><li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Worked with cross-functional teams to ship reliable features for large-scale products.</li></ul></article>
+          <article id="tab3" class="tab-panel hidden space-y-5"><h3 class="text-xl font-semibold text-lightestSlate">Studio Developer <span class="text-green">@ Scout Studio</span></h3><p class="font-mono text-sm text-slate">January 2017 — June 2017</p><ul class="space-y-4"><li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Created responsive websites and digital branding experiences for student-led projects.</li></ul></article>
+          <article id="tab4" class="tab-panel hidden space-y-5"><h3 class="text-xl font-semibold text-lightestSlate">Software Engineer <span class="text-green">@ Starry</span></h3><p class="font-mono text-sm text-slate">July 2016 — December 2016</p><ul class="space-y-4"><li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Developed reusable components and helped maintain frontend features.</li></ul></article>
+          <article id="tab5" class="tab-panel hidden space-y-5"><h3 class="text-xl font-semibold text-lightestSlate">Creative Technologist <span class="text-green">@ MullenLowe</span></h3><p class="font-mono text-sm text-slate">January 2015 — June 2016</p><ul class="space-y-4"><li class="pl-7 relative before:content-['▹'] before:absolute before:left-0 before:text-green">Built interactive prototypes and campaign websites for agency clients.</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="max-w-5xl mx-auto py-24">
+      <h2 class="section-heading flex items-center text-2xl md:text-3xl font-bold text-lightestSlate mb-16">
+        <span class="font-mono text-green text-xl mr-3">03.</span> Some Things I’ve Built
+      </h2>
+
+      <div class="space-y-28">
+        <!-- Project 1 -->
+        <article class="relative grid md:grid-cols-12 items-center gap-4">
+          <a href="#" class="project-image relative md:col-span-7 h-64 md:h-[360px] bg-lightNavy rounded overflow-hidden border border-lightestNavy">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,#64ffda33,transparent_30%),linear-gradient(135deg,#183b4a,#0f223d)]"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-green font-mono">
+              <h3 class="text-4xl font-bold">Halcyon</h3>
+              <p class="text-xs mt-5 opacity-70">A minimal, dark blue theme for VS Code, Sublime Text, Atom, and more.</p>
+              <div class="mt-10 w-4/5 h-28 rounded bg-navy/60 border border-green/20"></div>
+            </div>
+          </a>
+
+          <div class="md:col-span-6 md:col-start-7 md:text-right z-10">
+            <p class="font-mono text-green text-sm mb-2">Featured Project</p>
+            <h3 class="text-2xl font-bold text-lightestSlate mb-5">Halcyon Theme</h3>
+            <div class="bg-lightNavy rounded p-6 shadow-navy text-lightSlate md:-ml-20">
+              <p>A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on <span class="text-green">Visual Studio Marketplace</span>, <span class="text-green">Package Control</span>, <span class="text-green">Atom Package Manager</span>, and <span class="text-green">npm</span>.</p>
+            </div>
+            <ul class="flex flex-wrap md:justify-end gap-5 mt-6 font-mono text-sm text-slate">
+              <li>VS Code</li><li>Sublime Text</li><li>Atom</li><li>iTerm2</li><li>Hyper</li>
+            </ul>
+            <div class="flex md:justify-end gap-5 mt-5 text-lightestSlate">
+              <a href="#" class="hover:text-green"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg></a>
+              <a href="#" class="hover:text-green"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="relative grid md:grid-cols-12 items-center gap-4">
+          <div class="md:col-span-6 md:text-left z-10 order-2 md:order-1">
+            <p class="font-mono text-green text-sm mb-2">Featured Project</p>
+            <h3 class="text-2xl font-bold text-lightestSlate mb-5">Spotify Profile</h3>
+            <div class="bg-lightNavy rounded p-6 shadow-navy text-lightSlate md:-mr-20">
+              <p>A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.</p>
+            </div>
+            <ul class="flex flex-wrap gap-5 mt-6 font-mono text-sm text-slate">
+              <li>React</li><li>Styled Components</li><li>Express</li><li>Spotify API</li><li>Heroku</li>
+            </ul>
+            <div class="flex gap-5 mt-5 text-lightestSlate">
+              <a href="#" class="hover:text-green"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg></a>
+              <a href="#" class="hover:text-green"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+            </div>
+          </div>
+
+          <a href="#" class="project-image relative md:col-span-7 md:col-start-6 h-64 md:h-[360px] bg-lightNavy rounded overflow-hidden border border-lightestNavy order-1 md:order-2">
+            <div class="absolute inset-0 bg-[linear-gradient(135deg,#112240,#173b42)]"></div>
+            <div class="absolute inset-0 p-8 font-mono text-green">
+              <div class="w-8 h-8 rounded-full bg-green/70 mb-8"></div>
+              <div class="mx-auto w-24 h-24 rounded-full bg-green/20 border border-green/30"></div>
+              <h3 class="text-center text-3xl mt-5 font-bold">Brittany Chiang</h3>
+              <div class="grid grid-cols-3 text-center text-xs mt-4 opacity-70"><span>15<br>Followers</span><span>3<br>Following</span><span>65<br>Playlists</span></div>
+              <div class="mt-10 grid grid-cols-2 gap-8 text-xs opacity-70"><div class="h-20 border-t border-green/20 pt-3">Top Artists of All Time</div><div class="h-20 border-t border-green/20 pt-3">Top Tracks of All Time</div></div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="relative grid md:grid-cols-12 items-center gap-4">
+          <a href="#" class="project-image relative md:col-span-7 h-64 md:h-[360px] bg-lightNavy rounded overflow-hidden border border-lightestNavy">
+            <div class="absolute inset-0 bg-[linear-gradient(135deg,#35d6c1,#12385c)]"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center font-mono text-navy/80">
+                <p class="text-sm mb-4">THE NEWLINE GUIDE TO</p>
+                <h3 class="text-6xl font-bold">node + react</h3>
+              </div>
+            </div>
+          </a>
+
+          <div class="md:col-span-6 md:col-start-7 md:text-right z-10">
+            <p class="font-mono text-green text-sm mb-2">Featured Project</p>
+            <h3 class="text-2xl font-bold text-lightestSlate mb-5">Build a Spotify Connected App</h3>
+            <div class="bg-lightNavy rounded p-6 shadow-navy text-lightSlate md:-ml-20">
+              <p>Having struggled with understanding how the Spotify OAuth flow works, I made a course that explains the authorization process using Node, React, and Express.</p>
+            </div>
+            <ul class="flex flex-wrap md:justify-end gap-5 mt-6 font-mono text-sm text-slate">
+              <li>React</li><li>Express</li><li>Spotify API</li><li>Styled Components</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Other Projects -->
+    <section class="max-w-5xl mx-auto py-24">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-lightestSlate">Other Noteworthy Projects</h2>
+        <a href="#" class="font-mono text-green text-sm mt-3 inline-block hover:underline">view the archive</a>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+            <svg class="w-5 h-5 text-lightSlate" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">Integrating Algolia Search with WordPress Multisite</h3>
+          <p class="text-lightSlate mb-8">Building a custom multisite compatible WordPress plugin to build global search with Algolia</p>
+          <ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>Algolia</li><li>WordPress</li><li>PHP</li></ul>
+        </article>
+
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+            <div class="flex gap-4 text-lightSlate"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></div>
+          </div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">Time to Have More Fun</h3>
+          <p class="text-lightSlate mb-8">A single page web app for helping me choose where to travel, built with Next.js, Firebase, and Tailwind CSS</p>
+          <ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>Next.js</li><li>Tailwind CSS</li><li>Firebase</li></ul>
+        </article>
+
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+            <svg class="w-5 h-5 text-lightSlate" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">Building a Headless Mobile App CMS From Scratch</h3>
+          <p class="text-lightSlate mb-8">Find out how we built a custom headless CMS with Node, Express, and Firebase for a project at Upstatement</p>
+          <ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>Node</li><li>Express</li><li>Firebase</li><li>Vue</li></ul>
+        </article>
+
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green"><svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg><div class="flex gap-4 text-lightSlate"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></div></div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">OctoProfile</h3><p class="text-lightSlate mb-8">A nicer look at your GitHub profile and repo stats with a clean, responsive design.</p><ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>React</li><li>GitHub API</li><li>CSS</li></ul>
+        </article>
+
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green"><svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg><div class="flex gap-4 text-lightSlate"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 2.1 2.3 2.8.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17 7.6 18 7.9 18 7.9c.6 1.6.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></div></div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">Google Keep Clone</h3><p class="text-lightSlate mb-8">A simple Google Keep clone built with React and Firebase.</p><ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>React</li><li>Firebase</li></ul>
+        </article>
+
+        <article class="bg-lightNavy p-7 rounded hover:-translate-y-2 transition shadow-navy min-h-[300px] flex flex-col">
+          <div class="flex justify-between items-center mb-8 text-green"><svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg><svg class="w-5 h-5 text-lightSlate" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></div>
+          <h3 class="text-xl font-bold text-lightestSlate mb-3">Apple Music Embeddable Web Player Widget</h3><p class="text-lightSlate mb-8">Embeddable music player widget for Apple Music playlists.</p><ul class="mt-auto flex gap-4 font-mono text-xs text-slate"><li>MusicKit</li><li>JavaScript</li><li>SCSS</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="min-h-[70vh] max-w-2xl mx-auto flex flex-col justify-center items-center text-center py-24">
+      <p class="font-mono text-green mb-5">04. What’s Next?</p>
+      <h2 class="text-[clamp(2.5rem,6vw,4rem)] font-bold text-lightestSlate mb-5">Get In Touch</h2>
+      <p class="text-lg text-lightSlate max-w-xl">Although I’m not currently looking for any new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!</p>
+      <a href="mailto:brittany.chiang@gmail.com" class="font-mono text-green border border-green rounded px-8 py-4 mt-12 hover:bg-green/10 transition">Say Hello</a>
+    </section>
+  </main>
+
+  <footer class="py-6 text-center font-mono text-xs text-slate">
+    <p>Designed & Built with HTML and Tailwind CSS</p>
+  </footer>
+
+  <script>
+    const siteHeader = document.getElementById('siteHeader');
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    /* Header behavior:
+       - When you scroll down, the header vanishes.
+       - When you scroll up, the header comes back.
+       - At the very top, the header always shows. */
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const menuIsOpen = mobileMenu.classList.contains('open');
+
+      if (menuIsOpen) return;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        siteHeader.classList.add('hide-header');
+      } else {
+        siteHeader.classList.remove('hide-header');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.classList.toggle('overflow-hidden');
+      siteHeader.classList.remove('hide-header');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('overflow-hidden');
+      });
+    });
+
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(panel => panel.classList.add('hidden'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
